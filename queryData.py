@@ -29,7 +29,7 @@ def query_rag(query_text: str):
     )
     
     #Search the DB
-    results = db.similarity_search_with_score(query_text,k=5)
+    results = db.similarity_search_with_score(query_text,k=15)
     
     context_text = "\n\n---\n\n".join([doc.page_content for doc,_score in results])
     
@@ -42,7 +42,7 @@ def query_rag(query_text: str):
     sources = [doc.metadata.get("id",None) for doc,_score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"
     print(formatted_response)
-    return response_text
+    return response_text,sources
     
 if __name__ == "__main__":
     main()
