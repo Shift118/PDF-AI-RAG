@@ -5,34 +5,42 @@ from queryData import query_rag
 import streamlit as st
 import os
 
-# Setting up the page configuration
+# Set up the page configuration for the Streamlit app
 st.set_page_config(
     page_title="PDF AI",
     layout="centered",
     page_icon="📖"
 )
 
-# Title of the app
+# Display the title of the application
 st.title("PDF AI")
 
-# Folder for uploaded files
+# Define the folder where uploaded files will be stored
 upload_folder = "data/books"
 
 # Initialize session state for uploaded files if not already present
 if 'uploaded_files' not in st.session_state:
-    st.session_state.uploaded_files = os.listdir(upload_folder)  # Load existing files in the folder
+    st.session_state.uploaded_files = os.listdir(upload_folder)
 
-# Sidebar header
+# Initialize session state for the file uploader key if not already present
+if "uploader_key" not in st.session_state:
+    st.session_state.uploader_key = 0
+
+# Function to update the file uploader key
+def update_key():
+    st.session_state.uploader_key += 1
+
+# Add a header to the sidebar
 st.sidebar.header("Uploaded Files")
 
-# Sidebar form for file deletion
+# Create a form in the sidebar for file deletion
 with st.sidebar.form("delete_form"):
-    # Display the uploaded files in the sidebar
+    # Display the list of uploaded files in the sidebar
     if st.session_state.uploaded_files:
         for i, file in enumerate(st.session_state.uploaded_files, start=1):
             st.subheader(f"{i}) {file}")
 
-    # Deleting all files in the folder
+    # Add a button to delete all files in the folder
     if st.form_submit_button("Delete All Files🫗"):
         try:
             # Clear the database before deleting files
@@ -45,12 +53,17 @@ with st.sidebar.form("delete_form"):
 
             # Reset the list of uploaded files in session state
             st.session_state.uploaded_files = []
-            st.success("All Files Have Been Deleted.")
+            st.rerun()  # Rerun the app to reflect changes
         except Exception as e:
             st.warning(f"Can't delete files at the moment!\n{e}")
 
-# File upload interface (allow multiple files)
-uploaded_files = st.file_uploader("Upload Your PDF", type="pdf", accept_multiple_files=True)
+# File uploader interface to allow multiple PDF uploads
+uploaded_files = st.file_uploader(
+    "Upload Your PDF", 
+    type=["pdf"], 
+    accept_multiple_files=True, 
+    key=f"uploader_{st.session_state.uploader_key}"
+)
 
 # Process uploaded files if any exist
 if uploaded_files:
@@ -59,37 +72,40 @@ if uploaded_files:
         for uploaded_file in uploaded_files:
             file_path = os.path.join(upload_folder, uploaded_file.name)
 
-            # Save each uploaded file
+            # Save each uploaded file to the specified folder
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
             
             uploaded_filenames.append(uploaded_file.name)
 
+        # Display a spinner while processing the files
         with st.spinner("Processing and Adding to DB..."):
-            # Load, split, and add documents to the database for each uploaded file
-            for file in uploaded_filenames:
-                documents = load_documents()  # Load the documents
-                chunks = split_documents(documents)  # Split documents into chunks
-                add_to_chroma(chunks)  # Add the chunks to Chroma database
-            
+            # Load, split, and add documents to the database
+            documents = load_documents()  # Load the documents
+            chunks = split_documents(documents)  # Split documents into chunks
+            add_to_chroma(chunks)  # Add the chunks to the Chroma database
+
             # Update session state with the newly uploaded files
             st.session_state.uploaded_files = os.listdir(upload_folder)
-            st.success(f"{len(uploaded_filenames)} Files Have Been Uploaded")
+            update_key()  # Update the uploader key
+        st.rerun()  # Rerun the app to reflect changes
 
     except Exception as e:
         st.warning(f"Error while uploading files: {e}")
 
-# Query input field for the user
-query = st.text_input("Enter Your Question:", value="How to make an offer?")
+# Create a form for user query input
+with st.form("user_query_input"):
+    query = st.text_input("Enter Your Question:", value="How to make an offer?")
 
-# Button to submit the query
-if st.button("Query📩"):
-    st.write(query)
-    # Query the database using RAG
-    response, sources = query_rag(query)
-    st.write(response)
-    st.write("Sources📖:")
+    # Add a button to submit the query
+    if st.form_submit_button("Query📩"):
+        st.write(query)  # Display the user's query
 
-    # Clean and display the sources
-    cleaned_source = "\n".join(sorted(set([reference[11:-2].replace(":", " | Page ") for reference in sources])))
-    st.text(cleaned_source)
+        # Query the database using RAG (Retrieval-Augmented Generation)
+        response, sources = query_rag(query)
+        st.write(response)  # Display the response from the query
+
+        # Display the sources of the response
+        st.write("Sources📖:")
+        cleaned_source = "\n".join(sorted(set([reference[11:-2].replace(":", " | Page ") for reference in sources])))
+        st.text(cleaned_source)  # Display cleaned and formatted sources
