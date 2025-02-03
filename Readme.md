@@ -1,4 +1,3 @@
-```markdown
 # PDF AI - RAG-powered Document Assistant 📚🤖
 
 ![PDF AI Overview](OverView.png)
