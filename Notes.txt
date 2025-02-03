@@ -1,0 +1,4 @@
+langchain #LLM Library
+chromadb  #Vector Storage
+pypdf     #Loading PDFs
+pytest    #Unit Testing

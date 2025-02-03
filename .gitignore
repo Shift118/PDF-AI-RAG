@@ -1,0 +1,24 @@
+# Virtual environment
+/venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Chroma database
+/chroma/
+
+# Ignore all files in data/books/ but not the folders
+data/books/*
+!data/books/**/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
