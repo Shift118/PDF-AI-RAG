@@ -95,7 +95,7 @@ if uploaded_files:
 
 # Create a form for user query input
 with st.form("user_query_input"):
-    query = st.text_input("Enter Your Question:", value="How to make an offer?")
+    query = st.text_input("Enter Your Question:")
 
     # Add a button to submit the query
     if st.form_submit_button("Query📩"):
