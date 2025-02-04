@@ -1,0 +1,19 @@
+existing_ids
+{'data\\books\\Sheet 7.docx.pdf:0:1', 'data\\books\\Sheet 7.docx.pdf:0:0'}
+
+
+
+chunk meta data
+{'source': 'data\\books\\6.pdf', 'page': 0, 'page_label': '1', 'id': 'data\\books\\6.pdf:0:0'}
+{'source': 'data\\books\\6.pdf', 'page': 0, 'page_label': '1', 'id': 'data\\books\\6.pdf:0:1'}
+{'source': 'data\\books\\6.pdf', 'page': 0, 'page_label': '1', 'id': 'data\\books\\6.pdf:0:2'}
+{'source': 'data\\books\\6.pdf', 'page': 1, 'page_label': '2', 'id': 'data\\books\\6.pdf:1:0'}
+{'source': 'data\\books\\6.pdf', 'page': 1, 'page_label': '2', 'id': 'data\\books\\6.pdf:1:1'}
+{'source': 'data\\books\\6.pdf', 'page': 1, 'page_label': '2', 'id': 'data\\books\\6.pdf:1:2'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 0, 'page_label': '1', 'id': 'data\\books\\L. Quiz 3 arch.pdf:0:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 1, 'page_label': '2', 'id': 'data\\books\\L. Quiz 3 arch.pdf:1:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 2, 'page_label': '3', 'id': 'data\\books\\L. Quiz 3 arch.pdf:2:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 3, 'page_label': '4', 'id': 'data\\books\\L. Quiz 3 arch.pdf:3:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 4, 'page_label': '5', 'id': 'data\\books\\L. Quiz 3 arch.pdf:4:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 5, 'page_label': '6', 'id': 'data\\books\\L. Quiz 3 arch.pdf:5:0'}
+{'source': 'data\\books\\L. Quiz 3 arch.pdf', 'page': 5, 'page_label': '6', 'id': 'data\\books\\L. Quiz 3 arch.pdf:5:1'}

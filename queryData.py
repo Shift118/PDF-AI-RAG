@@ -21,15 +21,23 @@ def main():
     query_rag(query_text)
     
     
-def query_rag(query_text: str):
+def query_rag(query_text: str,selected_files):
     embedding_function = get_embedding_function()
     db = Chroma(
         persist_directory=CHROMA_PATH, 
         embedding_function= embedding_function
     )
-    
+    search_files_paths = [f"data\\books\\{name}" for name in selected_files]
     #Search the DB
-    results = db.similarity_search_with_score(query_text,k=15)
+    results = db.similarity_search_with_score(
+        query_text,
+        k=15,
+        filter = {
+            "source": {
+                "$in": search_files_paths
+            }
+        }
+        )
     
     context_text = "\n\n---\n\n".join([doc.page_content for doc,_score in results])
     

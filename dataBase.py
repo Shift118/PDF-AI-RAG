@@ -38,8 +38,8 @@ def add_to_chroma(chunks: list[Document]):
         db._client._system.stop()
 
 def calculate_chunk_ids(chunks):
-    # This will create IDs like "data/monopoly.pdf:6:2"
-    # Page Source : Page Number : Chunk Index
+    #This will create IDs like "data\\books\\file.pdf:0:0"
+    #Page Source : Page Number : Chunk Index
     last_page_id = None
     current_chunk_index = 0
 
