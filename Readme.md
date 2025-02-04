@@ -17,6 +17,12 @@ Inspired by [pixegami's RAG tutorial](https://github.com/pixegami/rag-tutorial-v
 - 🗃️ **Optimized ChromaDB integration** for efficient vector storage and retrieval
 - 🧹 **One-click database cleanup** and document purge
 - 📖 **Source citation tracking** for answer verification
+- 🗂️ **Selective file querying**: Query specific files from the database
+- 🗑️ **Selective file deletion**: Delete specific files from the database and storage
+- 🔄 **Real-time file management**: Automatically update the file list in the sidebar
+- 🛠️ **Enhanced error handling**: Improved error messages and handling for better debugging
+- ⚡ **Efficient chunk processing**: Optimized document chunking for faster processing
+- 🧩 **Modular code structure**: Improved maintainability and readability
 
 ---
 
@@ -49,7 +55,7 @@ Inspired by [pixegami's RAG tutorial](https://github.com/pixegami/rag-tutorial-v
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Shift118/pdf-ai-rag.git
+git clone https://github.com/Shift118/PDF-AI-RAG.git
 cd pdf-ai-rag
 ```
 
@@ -89,7 +95,7 @@ streamlit run app.py
 
 ## Technical Enhancements 🛠️
 
-Compared to the original implementation:
+Compared to the original implementation (available in the [Base branch](https://github.com/Shift118/Base.git)):
 - **Streamlit Interface**: Modern web UI with real-time feedback
 - **Database Optimization**: Improved ChromaDB handling with:
   - Better persistence management
@@ -100,6 +106,8 @@ Compared to the original implementation:
   - Source citation formatting
   - Batch processing optimizations
 - **System Architecture**: Modular code structure for maintainability
+- **Selective File Management**: Added features for querying and deleting specific files
+- **Real-time Updates**: Automatically update the file list in the sidebar
 
 ---
 

@@ -98,7 +98,7 @@ with st.form("user_query_input"):
     query = st.text_input("Enter Your Question:")
 
     # Add a button to submit the query
-    if st.form_submit_button("Query🤖"):
+    if st.form_submit_button("Query with Selected Files🤖"):
         # Check if there is files selected
         if  selected_files:
             st.write(query)  # Display the user's query
