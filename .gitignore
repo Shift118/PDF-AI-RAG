@@ -1,6 +1,10 @@
 # Virtual environment
 /venv/
 
+#Notes
+test.py
+notes.txt
+
 # Python cache
 __pycache__/
 *.py[cod]

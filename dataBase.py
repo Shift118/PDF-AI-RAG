@@ -62,16 +62,27 @@ def calculate_chunk_ids(chunks):
         chunk.metadata["id"] = chunk_id
     return chunks
 
-def clear_database():
+def clear_database(selected_files):
     try:
         # Initialize Chroma instance
         db = Chroma(
             persist_directory=CHROMA_PATH,
             embedding_function=None
         )
-        # Use delete_collection to safely clear all data
         db._client._system.start()
-        db.delete_collection()
-        print("✅ Database cleared successfully.")
+        
+        # Construct the list of source paths to match
+        files_paths = [f"data\\books\\{name}" for name in selected_files]
+        
+        # Delete documents where the "source" metadata matches any of the selected files
+        db.delete(
+            where={  # Filter by metadata
+                "source": {  # Replace "source" with the actual metadata key if different
+                    "$in": files_paths
+                }
+            }
+        )
+        
+        print(f"✅ Documents from selected files deleted successfully: \n{"\n".join(selected_files)}")
     except Exception as e:
         print(f"❌ Error clearing database: {e}")

@@ -46,19 +46,22 @@ if uploaded_files != existing_files:
             selected_files.append(file)
 
 # Add a button to delete all files in the folder
-if st.sidebar.button("Delete All Files🫗"):
-    try:
-        # Clear the database before deleting files
-        clear_database()
+if st.sidebar.button("Delete Selected Files🗑️"):
+    if selected_files:
+        try:
+            # Clear the database before deleting files
+            clear_database(selected_files)
 
-        # Delete all files in the folder
-        for file in uploaded_files:
-            file_path = os.path.join(upload_folder, file)
-            os.remove(file_path)
-            
-        st.rerun()  # Rerun the app to reflect changes
-    except Exception as e:
-        st.warning(f"Can't delete files at the moment!\n{e}")
+            # Delete all files in the folder
+            for file in selected_files:
+                file_path = os.path.join(upload_folder, file)
+                os.remove(file_path)
+                
+            st.rerun()  # Rerun the app to reflect changes
+        except Exception as e:
+            st.warning(f"Can't delete files at the moment!\n{e}")
+    else:
+        st.warning("Select a File to Delete!")
 
 # File uploader interface to allow multiple PDF uploads
 uploaded_files = st.file_uploader(
@@ -73,7 +76,6 @@ if uploaded_files:
     try:
         for uploaded_file in uploaded_files:
             file_path = os.path.join(upload_folder, uploaded_file.name)
-            print(file_path)
             # Save each uploaded file to the specified folder
             with open(file_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
@@ -96,7 +98,7 @@ with st.form("user_query_input"):
     query = st.text_input("Enter Your Question:")
 
     # Add a button to submit the query
-    if st.form_submit_button("Query📩"):
+    if st.form_submit_button("Query🤖"):
         # Check if there is files selected
         if  selected_files:
             st.write(query)  # Display the user's query
