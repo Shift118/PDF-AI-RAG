@@ -1,3 +1,7 @@
+## New Branch: Data Selection 🌟
+
+Check out the new branch on [GitHub](https://github.com/Shift118/PDF-AI-RAG.git) which allows for data selection for deleting or querying. This enhancement provides more control over the data management process, making it easier to handle specific documents and queries efficiently.
+
 # PDF AI - RAG-powered Document Assistant 📚🤖
 
 ![PDF AI Overview](OverView.png)
